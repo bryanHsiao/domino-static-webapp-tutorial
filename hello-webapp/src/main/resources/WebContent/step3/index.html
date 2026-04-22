@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>步驟三 - 即時 API 儀表板</title>
+    <meta name="description" content="Step 3 tutorial page that fetches the Domino /api endpoint and visualizes current services.">
+    <link rel="stylesheet" href="../assets/site.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-lang="zh">
+    <div class="page-shell">
+        <div class="page-topbar">
+            <button type="button" class="lang-toggle" data-label-zh="English" data-label-en="中文"></button>
+        </div>
+
+        <header class="hero">
+            <div class="hero-copy">
+                <p class="eyebrow"><span class="lang-zh">步驟三成果</span><span class="lang-en">Step 3 Result</span></p>
+                <h1><span class="lang-zh">即時 API 服務儀表板</span><span class="lang-en">Live API Service Dashboard</span></h1>
+                <p class="lede">
+                    <span class="lang-zh">這一階段不再只是展示靜態頁面，而是開始讀取 live `/api` 資料，並把回傳的 service 狀態整理成可閱讀的 dashboard。</span>
+                    <span class="lang-en">This stage goes beyond static presentation and fetches live `/api` data, turning the returned service status into a readable dashboard.</span>
+                </p>
+                <nav class="hero-nav" aria-label="Tutorial navigation">
+                    <a href="../index.html"><span class="lang-zh">教程首頁</span><span class="lang-en">Tutorial Home</span></a>
+                    <a href="../docs/step3.html"><span class="lang-zh">步驟三文件</span><span class="lang-en">Step 3 Docs</span></a>
+                    <a href="../step1/index.html"><span class="lang-zh">步驟一</span><span class="lang-en">Step 1</span></a>
+                    <a href="../step2/index.html"><span class="lang-zh">步驟二</span><span class="lang-en">Step 2</span></a>
+                </nav>
+            </div>
+
+            <div class="hero-panel">
+                <p class="hero-panel-label"><span class="lang-zh">即時端點</span><span class="lang-en">Live Endpoint</span></p>
+                <p class="hero-panel-value" id="api-url">/api</p>
+                <button id="refresh-button" type="button"></button>
+            </div>
+        </header>
+
+        <main class="layout">
+            <section class="summary-grid" aria-label="Summary metrics">
+                <article class="metric-card">
+                    <span class="metric-label"><span class="lang-zh">總服務數</span><span class="lang-en">Total Services</span></span>
+                    <strong class="metric-value" id="total-count">0</strong>
+                </article>
+                <article class="metric-card success">
+                    <span class="metric-label"><span class="lang-zh">已啟用</span><span class="lang-en">Enabled</span></span>
+                    <strong class="metric-value" id="enabled-count">0</strong>
+                </article>
+                <article class="metric-card muted">
+                    <span class="metric-label"><span class="lang-zh">未啟用</span><span class="lang-en">Disabled</span></span>
+                    <strong class="metric-value" id="disabled-count">0</strong>
+                </article>
+                <article class="metric-card">
+                    <span class="metric-label"><span class="lang-zh">最後刷新</span><span class="lang-en">Last Refresh</span></span>
+                    <strong class="metric-value metric-time" id="last-refresh">Waiting</strong>
+                </article>
+            </section>
+
+            <section class="panel status-panel">
+                <div class="panel-head">
+                    <div>
+                        <p class="panel-kicker"><span class="lang-zh">執行狀態</span><span class="lang-en">Runtime Status</span></p>
+                        <h2><span class="lang-zh">抓取結果</span><span class="lang-en">Fetch State</span></h2>
+                    </div>
+                    <span class="status-chip loading" id="status-chip">Loading</span>
+                </div>
+                <p class="status-copy" id="status-copy"></p>
+            </section>
+
+            <section class="panel services-panel">
+                <div class="panel-head">
+                    <div>
+                        <p class="panel-kicker"><span class="lang-zh">即時回應</span><span class="lang-en">Live Response</span></p>
+                        <h2><span class="lang-zh">服務清單</span><span class="lang-en">Available Services</span></h2>
+                    </div>
+                    <p class="panel-meta" id="panel-meta"></p>
+                </div>
+                <div class="services-grid" id="services-grid" aria-live="polite"></div>
+            </section>
+
+            <section class="panel response-panel">
+                <div class="panel-head">
+                    <div>
+                        <p class="panel-kicker"><span class="lang-zh">原始資料</span><span class="lang-en">Raw Data</span></p>
+                        <h2><span class="lang-zh">JSON 預覽</span><span class="lang-en">JSON Preview</span></h2>
+                    </div>
+                </div>
+                <pre id="raw-json"></pre>
+            </section>
+        </main>
+    </div>
+
+    <script src="../assets/lang-toggle.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

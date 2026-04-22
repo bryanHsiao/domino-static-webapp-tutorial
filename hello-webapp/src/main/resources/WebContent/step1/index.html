@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>步驟一 - Hello Domino Webapp</title>
+    <link rel="stylesheet" href="../assets/site.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-lang="zh">
+    <main class="shell">
+        <div class="page-topbar">
+            <button type="button" class="lang-toggle" data-label-zh="English" data-label-en="中文"></button>
+        </div>
+
+        <p class="eyebrow"><span class="lang-zh">步驟一成果</span><span class="lang-en">Step 1 Result</span></p>
+        <h1><span class="lang-zh">Hello Domino Webapp</span><span class="lang-en">Hello Domino Webapp</span></h1>
+        <p class="lede">
+            <span class="lang-zh">這個頁面保留最初的靜態版本。它的作用是證明：只用 HTML、CSS、JavaScript，也能透過 Domino 的 OSGi webapp 機制對外提供。</span>
+            <span class="lang-en">This page preserves the original static sample. Its purpose was to prove that plain HTML, CSS, and JavaScript can be served through Domino's OSGi webapp mechanism.</span>
+        </p>
+
+        <section class="card">
+            <h2><span class="lang-zh">狀態檢查</span><span class="lang-en">Status Checks</span></h2>
+            <ul id="checks"></ul>
+        </section>
+
+        <section class="card">
+            <h2><span class="lang-zh">接下來的發展</span><span class="lang-en">What came next</span></h2>
+            <p>
+                <span class="lang-zh">這一階段完全手寫。下一階段改成 Vite build，但部署方式保持不變。</span>
+                <span class="lang-en">This stage is fully handwritten. The next stage switches to a Vite build while keeping the same deployment path.</span>
+            </p>
+            <p>
+                <a href="../index.html"><span class="lang-zh">回教程首頁</span><span class="lang-en">Tutorial Home</span></a>
+                · <a href="../docs/step1.html"><span class="lang-zh">閱讀步驟一文件</span><span class="lang-en">Read Step 1 Docs</span></a>
+                · <a href="../step2/index.html"><span class="lang-zh">前往步驟二</span><span class="lang-en">Open Step 2</span></a>
+                · <a href="../step3/index.html"><span class="lang-zh">前往步驟三</span><span class="lang-en">Open Step 3</span></a>
+            </p>
+        </section>
+    </main>
+
+    <script src="../assets/lang-toggle.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

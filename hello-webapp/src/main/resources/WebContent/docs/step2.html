@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>步驟二文件</title>
+    <link rel="stylesheet" href="../assets/site.css">
+    <link rel="stylesheet" href="./docs.css">
+</head>
+<body data-lang="zh">
+    <main class="docs-shell">
+        <div class="page-topbar">
+            <button type="button" class="lang-toggle" data-label-zh="English" data-label-en="中文"></button>
+        </div>
+        <header class="docs-hero">
+            <p class="eyebrow"><span class="lang-zh">步驟二文件</span><span class="lang-en">Step 2 Docs</span></p>
+            <h1><span class="lang-zh">Vite 前端整合</span><span class="lang-en">Vite Frontend Integration</span></h1>
+            <p class="lede">
+                <span class="lang-zh">步驟二的重點不是換掉 Domino，而是把前端改成正式的 build pipeline，讓 UI 有獨立的 source 與編譯流程。</span>
+                <span class="lang-en">Step 2 did not replace Domino. It replaced the handwritten front end with a real build pipeline and a separate source project.</span>
+            </p>
+            <nav class="docs-nav">
+                <a href="./index.html"><span class="lang-zh">回文件首頁</span><span class="lang-en">Docs Home</span></a>
+                <a href="../step2/index.html"><span class="lang-zh">打開展示頁</span><span class="lang-en">Open Demo</span></a>
+                <a href="../index.html"><span class="lang-zh">回教程首頁</span><span class="lang-en">Tutorial Home</span></a>
+            </nav>
+        </header>
+        <section class="docs-panel">
+            <h2><span class="lang-zh">做了哪些事</span><span class="lang-en">What changed</span></h2>
+            <ul>
+                <li><span class="lang-zh">新增 `frontend-vite` 專案，作為前端 source 與 build 工作區。</span><span class="lang-en">Added the `frontend-vite` project as the front-end source and build workspace.</span></li>
+                <li><span class="lang-zh">設定 Vite 輸出到 `WebContent/step2`。</span><span class="lang-en">Configured Vite to emit its output into `WebContent/step2`.</span></li>
+                <li><span class="lang-zh">保留 `plugin.xml`、`WEB-INF/web.xml` 與 Domino 的部署流程不變。</span><span class="lang-en">Kept `plugin.xml`, `WEB-INF/web.xml`, and the Domino deployment pipeline unchanged.</span></li>
+            </ul>
+        </section>
+        <section class="docs-panel">
+            <h2><span class="lang-zh">為什麼這樣切分</span><span class="lang-en">Why this split works</span></h2>
+            <ul>
+                <li><span class="lang-zh">前端開發與 Domino 打包各自獨立，責任更清楚。</span><span class="lang-en">Front-end development and Domino packaging stay separated cleanly.</span></li>
+                <li><span class="lang-zh">之後換框架或調整 UI，不必重設 Domino 架構。</span><span class="lang-en">Future UI or framework changes do not require redesigning the Domino side.</span></li>
+                <li><span class="lang-zh">這一步讓教學站開始有「可維護前端」的基礎。</span><span class="lang-en">This step establishes a maintainable front-end foundation for the tutorial site.</span></li>
+            </ul>
+        </section>
+    </main>
+    <script src="../assets/lang-toggle.js"></script>
+</body>
+</html>

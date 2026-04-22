@@ -1,0 +1,38 @@
+body[data-lang="zh"] .lang-en,
+body[data-lang="en"] .lang-zh {
+    display: none !important;
+}
+
+.page-topbar {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.lang-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: 10px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(31, 37, 36, 0.14);
+    background: rgba(255, 255, 255, 0.86);
+    color: inherit;
+    cursor: pointer;
+    text-decoration: none;
+    font: inherit;
+}
+
+.lang-toggle:hover {
+    border-color: rgba(191, 91, 50, 0.45);
+}
+
+.lang-inline {
+    display: inline;
+}
+
+.lang-block {
+    display: block;
+}

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>步驟三文件</title>
+    <link rel="stylesheet" href="../assets/site.css">
+    <link rel="stylesheet" href="./docs.css">
+</head>
+<body data-lang="zh">
+    <main class="docs-shell">
+        <div class="page-topbar">
+            <button type="button" class="lang-toggle" data-label-zh="English" data-label-en="中文"></button>
+        </div>
+        <header class="docs-hero">
+            <p class="eyebrow"><span class="lang-zh">步驟三文件</span><span class="lang-en">Step 3 Docs</span></p>
+            <h1><span class="lang-zh">即時 API 儀表板</span><span class="lang-en">Live API Dashboard</span></h1>
+            <p class="lede">
+                <span class="lang-zh">步驟三的重點是：前端不再只是靜態展示，而是開始讀取真實 API，並把 JSON 結果整理成可讀的 dashboard。</span>
+                <span class="lang-en">Step 3 moves beyond static presentation. The front end now reads a real API and turns the JSON response into a readable dashboard.</span>
+            </p>
+            <nav class="docs-nav">
+                <a href="./index.html"><span class="lang-zh">回文件首頁</span><span class="lang-en">Docs Home</span></a>
+                <a href="../step3/index.html"><span class="lang-zh">打開展示頁</span><span class="lang-en">Open Demo</span></a>
+                <a href="../index.html"><span class="lang-zh">回教程首頁</span><span class="lang-en">Tutorial Home</span></a>
+            </nav>
+        </header>
+        <section class="docs-panel">
+            <h2><span class="lang-zh">使用的資料來源</span><span class="lang-en">Data source used</span></h2>
+            <ul>
+                <li><span class="lang-zh">端點：`https://ap02.domino.com.tw/api`</span><span class="lang-en">Endpoint: `https://ap02.domino.com.tw/api`</span></li>
+                <li><span class="lang-zh">主要欄位：`services[]`</span><span class="lang-en">Primary field: `services[]`</span></li>
+                <li><span class="lang-zh">每筆資料包含 `name`、`enabled`、`version`、`href`。</span><span class="lang-en">Each record includes `name`, `enabled`, `version`, and `href`.</span></li>
+            </ul>
+        </section>
+        <section class="docs-panel">
+            <h2><span class="lang-zh">畫面設計重點</span><span class="lang-en">UI design choices</span></h2>
+            <ul>
+                <li><span class="lang-zh">用 summary metrics 快速看總數與啟用狀態。</span><span class="lang-en">Uses summary metrics for quick service counts and enablement status.</span></li>
+                <li><span class="lang-zh">用 animated cards 顯示每個 service。</span><span class="lang-en">Uses animated cards to show each service.</span></li>
+                <li><span class="lang-zh">保留 raw JSON panel，方便除錯與教學說明。</span><span class="lang-en">Keeps a raw JSON panel for debugging and instructional transparency.</span></li>
+                <li><span class="lang-zh">採 same-origin fetch，先避開 CORS，聚焦在資料呈現。</span><span class="lang-en">Uses same-origin fetch to avoid introducing CORS as the first obstacle.</span></li>
+            </ul>
+        </section>
+        <section class="docs-panel">
+            <h2><span class="lang-zh">建議延伸方向</span><span class="lang-en">Recommended next extensions</span></h2>
+            <ul>
+                <li><span class="lang-zh">往下探索 `/api/core` 等已啟用服務。</span><span class="lang-en">Drill into enabled services such as `/api/core`.</span></li>
+                <li><span class="lang-zh">加入 filter、sort 或群組顯示。</span><span class="lang-en">Add filtering, sorting, or grouped views.</span></li>
+                <li><span class="lang-zh">把下一步做成更完整的 API explorer。</span><span class="lang-en">Turn the next step into a richer API explorer.</span></li>
+            </ul>
+        </section>
+    </main>
+    <script src="../assets/lang-toggle.js"></script>
+</body>
+</html>

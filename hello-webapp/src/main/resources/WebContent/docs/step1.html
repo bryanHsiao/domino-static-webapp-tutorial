@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>步驟一文件</title>
+    <link rel="stylesheet" href="../assets/site.css">
+    <link rel="stylesheet" href="./docs.css">
+</head>
+<body data-lang="zh">
+    <main class="docs-shell">
+        <div class="page-topbar">
+            <button type="button" class="lang-toggle" data-label-zh="English" data-label-en="中文"></button>
+        </div>
+        <header class="docs-hero">
+            <p class="eyebrow"><span class="lang-zh">步驟一文件</span><span class="lang-en">Step 1 Docs</span></p>
+            <h1><span class="lang-zh">最小靜態版部署</span><span class="lang-en">Static Hello World Deployment</span></h1>
+            <p class="lede">
+                <span class="lang-zh">步驟一的目標是先證明：不靠 XPages，也能把純靜態前端包成 OSGi webapp，透過 UpdateSite NSF 部署到 Domino。</span>
+                <span class="lang-en">Step 1 proved that a pure static front end can be packaged as an OSGi webapp and deployed through an UpdateSite NSF without using XPages.</span>
+            </p>
+            <nav class="docs-nav">
+                <a href="./index.html"><span class="lang-zh">回文件首頁</span><span class="lang-en">Docs Home</span></a>
+                <a href="../step1/index.html"><span class="lang-zh">打開展示頁</span><span class="lang-en">Open Demo</span></a>
+                <a href="../index.html"><span class="lang-zh">回教程首頁</span><span class="lang-en">Tutorial Home</span></a>
+            </nav>
+        </header>
+        <section class="docs-panel">
+            <h2><span class="lang-zh">做了哪些事</span><span class="lang-en">What changed</span></h2>
+            <ul>
+                <li><span class="lang-zh">建立最小 `hello-webapp` 專案，包含 `plugin.xml`、`WEB-INF/web.xml` 與靜態資源。</span><span class="lang-en">Created the minimal `hello-webapp` project with `plugin.xml`, `WEB-INF/web.xml`, and static assets.</span></li>
+                <li><span class="lang-zh">把專案打包成 OSGi bundle，並產生 p2 update site。</span><span class="lang-en">Packaged the project as an OSGi bundle and generated a p2 update site.</span></li>
+                <li><span class="lang-zh">將 update site 匯入 `updatesite.nsf`，再透過 `OSGI_HTTP_DYNAMIC_BUNDLES` 啟用。</span><span class="lang-en">Imported the update site into `updatesite.nsf` and enabled it with `OSGI_HTTP_DYNAMIC_BUNDLES`.</span></li>
+            </ul>
+        </section>
+        <section class="docs-panel">
+            <h2><span class="lang-zh">這一步證明了什麼</span><span class="lang-en">What this proved</span></h2>
+            <ul>
+                <li><span class="lang-zh">Domino 可以提供非 XPages 應用。</span><span class="lang-en">Domino can serve a non-XPages application.</span></li>
+                <li><span class="lang-zh">OSGi bundle + p2 update site + updatesite.nsf 這條路是可行的。</span><span class="lang-en">The OSGi bundle + p2 update site + updatesite.nsf path works in practice.</span></li>
+                <li><span class="lang-zh">之後的每一步都可以沿用相同部署機制，只替換前端內容。</span><span class="lang-en">Later steps can keep the same deployment mechanism and only replace the front-end content.</span></li>
+            </ul>
+        </section>
+    </main>
+    <script src="../assets/lang-toggle.js"></script>
+</body>
+</html>

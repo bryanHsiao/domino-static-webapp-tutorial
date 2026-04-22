@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Domino 靜態 Webapp 教程</title>
+    <link rel="stylesheet" href="./assets/site.css">
+    <style>
+        :root {
+            --bg: #f4efe5;
+            --panel: rgba(255, 252, 247, 0.92);
+            --ink: #1f2624;
+            --muted: #5d6763;
+            --accent: #b35c38;
+            --deep: #233139;
+            --line: rgba(31, 38, 36, 0.12);
+            --shadow: 0 26px 60px rgba(37, 29, 18, 0.10);
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: Georgia, "Noto Serif TC", "PMingLiU", serif;
+            color: var(--ink);
+            background:
+                radial-gradient(circle at top left, rgba(179, 92, 56, 0.16), transparent 24%),
+                linear-gradient(180deg, #f8f4ec 0%, var(--bg) 100%);
+        }
+
+        main {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 52px 20px 72px;
+        }
+
+        .hero, .panel {
+            border: 1px solid var(--line);
+            border-radius: 26px;
+            background: var(--panel);
+            box-shadow: var(--shadow);
+        }
+
+        .hero {
+            padding: 34px;
+            background:
+                linear-gradient(135deg, rgba(255, 252, 247, 0.98), rgba(244, 235, 221, 0.90)),
+                var(--panel);
+        }
+
+        .eyebrow {
+            margin: 0 0 12px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            color: var(--accent);
+        }
+
+        h1 {
+            margin: 0;
+            max-width: 11ch;
+            font-size: clamp(2.8rem, 7vw, 5.2rem);
+            line-height: 0.94;
+        }
+
+        .lede {
+            max-width: 64ch;
+            margin: 18px 0 0;
+            line-height: 1.8;
+            color: var(--muted);
+            font-size: 1.06rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 22px;
+            margin-top: 28px;
+        }
+
+        .panel { padding: 24px; }
+        .panel h2, .panel h3 { margin-top: 0; }
+        .panel-large { grid-column: span 7; }
+        .panel-side { grid-column: span 5; }
+        .panel-full { grid-column: 1 / -1; }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .step-card {
+            padding: 20px;
+            border-radius: 20px;
+            border: 1px solid rgba(179, 92, 56, 0.16);
+            background: linear-gradient(180deg, rgba(179, 92, 56, 0.08), rgba(35, 49, 57, 0.04));
+        }
+
+        .step-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            border-radius: 999px;
+            background: var(--accent);
+            color: #fff;
+            font-size: 0.88rem;
+            letter-spacing: 0.08em;
+        }
+
+        .cta-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .cta-row a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 11px 16px;
+            border-radius: 999px;
+            text-decoration: none;
+            color: var(--ink);
+            border: 1px solid rgba(31, 38, 36, 0.14);
+            background: rgba(255, 252, 247, 0.90);
+        }
+
+        .cta-row a.primary {
+            background: var(--deep);
+            color: #fff;
+            border-color: var(--deep);
+        }
+
+        .fact-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .fact-list li {
+            padding: 14px 0;
+            border-top: 1px solid var(--line);
+        }
+
+        .fact-list li:first-child {
+            padding-top: 0;
+            border-top: 0;
+        }
+
+        .fact-label {
+            display: block;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.10em;
+            color: var(--muted);
+            margin-bottom: 6px;
+        }
+
+        code {
+            padding: 0.08em 0.35em;
+            border-radius: 0.4rem;
+            background: rgba(35, 49, 57, 0.08);
+        }
+
+        @media (max-width: 980px) {
+            .steps {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 860px) {
+            .panel-large, .panel-side, .panel-full {
+                grid-column: 1 / -1;
+            }
+        }
+    </style>
+</head>
+<body data-lang="zh">
+    <main>
+        <div class="page-topbar">
+            <button type="button" class="lang-toggle" data-label-zh="English" data-label-en="中文"></button>
+        </div>
+
+        <section class="hero">
+            <p class="eyebrow">
+                <span class="lang-zh">Domino 教學展示站</span>
+                <span class="lang-en">Domino Tutorial Showcase</span>
+            </p>
+            <h1>
+                <span class="lang-zh">靜態 Webapp 部署全流程</span>
+                <span class="lang-en">Static Webapp Deployment Walkthrough</span>
+            </h1>
+            <p class="lede">
+                <span class="lang-zh">
+                    這個首頁是整套 Domino OSGi webapp 教程的總入口。每一個步驟都保留自己的展示頁與說明頁，
+                    因此你可以回看每一階段的成果，而不需要讓新版本覆蓋舊版本。
+                </span>
+                <span class="lang-en">
+                    This root page is the main entry for the Domino OSGi webapp tutorial.
+                    Each step keeps both a demo page and a documentation page, so the
+                    progression stays visible instead of being overwritten by newer work.
+                </span>
+            </p>
+            <div class="cta-row">
+                <a class="primary" href="./step1/index.html">
+                    <span class="lang-zh">查看步驟一</span>
+                    <span class="lang-en">Open Step 1</span>
+                </a>
+                <a href="./step2/index.html">
+                    <span class="lang-zh">查看步驟二</span>
+                    <span class="lang-en">Open Step 2</span>
+                </a>
+                <a href="./step3/index.html">
+                    <span class="lang-zh">查看步驟三</span>
+                    <span class="lang-en">Open Step 3</span>
+                </a>
+                <a href="./docs/index.html">
+                    <span class="lang-zh">閱讀文件</span>
+                    <span class="lang-en">Open Docs</span>
+                </a>
+            </div>
+        </section>
+
+        <section class="grid">
+            <article class="panel panel-large">
+                <h2>
+                    <span class="lang-zh">目前可瀏覽的階段</span>
+                    <span class="lang-en">Available Stages</span>
+                </h2>
+                <div class="steps">
+                    <section class="step-card">
+                        <p class="step-badge">01</p>
+                        <h3><span class="lang-zh">步驟一</span><span class="lang-en">Step 1</span></h3>
+                        <p>
+                            <span class="lang-zh">最原始的靜態 Hello World 版本，用來證明 Domino 可以提供非 XPages 的 OSGi webapp。</span>
+                            <span class="lang-en">The original handwritten static sample proving that Domino can serve a non-XPages OSGi webapp.</span>
+                        </p>
+                        <div class="cta-row">
+                            <a href="./step1/index.html"><span class="lang-zh">打開展示頁</span><span class="lang-en">Open Demo</span></a>
+                            <a href="./docs/step1.html"><span class="lang-zh">閱讀說明</span><span class="lang-en">Read Docs</span></a>
+                        </div>
+                    </section>
+
+                    <section class="step-card">
+                        <p class="step-badge">02</p>
+                        <h3><span class="lang-zh">步驟二</span><span class="lang-en">Step 2</span></h3>
+                        <p>
+                            <span class="lang-zh">把前端換成 Vite build，但保留原本 Domino 的打包與 UpdateSite 部署機制。</span>
+                            <span class="lang-en">Moves the front end to a Vite build while preserving the Domino packaging and UpdateSite deployment pipeline.</span>
+                        </p>
+                        <div class="cta-row">
+                            <a href="./step2/index.html"><span class="lang-zh">打開展示頁</span><span class="lang-en">Open Demo</span></a>
+                            <a href="./docs/step2.html"><span class="lang-zh">閱讀說明</span><span class="lang-en">Read Docs</span></a>
+                        </div>
+                    </section>
+
+                    <section class="step-card">
+                        <p class="step-badge">03</p>
+                        <h3><span class="lang-zh">步驟三</span><span class="lang-en">Step 3</span></h3>
+                        <p>
+                            <span class="lang-zh">加入 live API 呼叫，直接讀取 `/api` 的服務清單，並做成帶動畫的 dashboard。</span>
+                            <span class="lang-en">Adds live API fetching from `/api` and visualizes the response as an animated dashboard.</span>
+                        </p>
+                        <div class="cta-row">
+                            <a href="./step3/index.html"><span class="lang-zh">打開展示頁</span><span class="lang-en">Open Demo</span></a>
+                            <a href="./docs/step3.html"><span class="lang-zh">閱讀說明</span><span class="lang-en">Read Docs</span></a>
+                        </div>
+                    </section>
+                </div>
+            </article>
+
+            <aside class="panel panel-side">
+                <h2><span class="lang-zh">部署重點</span><span class="lang-en">Deployment Facts</span></h2>
+                <ul class="fact-list">
+                    <li>
+                        <span class="fact-label"><span class="lang-zh">Context Root</span><span class="lang-en">Context Root</span></span>
+                        <strong>/hello-webapp</strong>
+                    </li>
+                    <li>
+                        <span class="fact-label"><span class="lang-zh">展示頁</span><span class="lang-en">Demo Paths</span></span>
+                        <strong>/step1/、/step2/、/step3/（使用 `index.html`）</strong>
+                    </li>
+                    <li>
+                        <span class="fact-label"><span class="lang-zh">說明頁</span><span class="lang-en">Docs Paths</span></span>
+                        <strong>/docs/index.html 與各步驟文件</strong>
+                    </li>
+                    <li>
+                        <span class="fact-label"><span class="lang-zh">打包方式</span><span class="lang-en">Packaging</span></span>
+                        <strong>OSGi bundle + p2 update site + updatesite.nsf</strong>
+                    </li>
+                </ul>
+            </aside>
+
+            <section class="panel panel-full">
+                <h2><span class="lang-zh">建議維護方式</span><span class="lang-en">Suggested Maintenance Pattern</span></h2>
+                <p>
+                    <span class="lang-zh">
+                        後續如果還要擴充，建議維持雙軌結構：
+                        展示頁放在 <code>/stepX/</code>，說明頁放在 <code>/docs/</code>。
+                        這樣教學內容會清楚很多，也比較不容易在改版時失去脈絡。
+                    </span>
+                    <span class="lang-en">
+                        For future expansion, keep two parallel tracks: showcase pages under
+                        <code>/stepX/</code> and explanation pages under <code>/docs/</code>.
+                        This keeps the tutorial clearer and preserves the reasoning behind each stage.
+                    </span>
+                </p>
+            </section>
+        </section>
+    </main>
+
+    <script src="./assets/lang-toggle.js"></script>
+</body>
+</html>

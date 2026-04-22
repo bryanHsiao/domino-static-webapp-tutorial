@@ -1,0 +1,56 @@
+name: Build Tutorial Site
+
+on:
+  push:
+    branches: ["main", "develop"]
+  pull_request:
+    branches: ["main", "develop"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+          cache-dependency-path: frontend-vite/package-lock.json
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+
+      - name: Install frontend dependencies
+        working-directory: frontend-vite
+        run: npm ci
+
+      - name: Build frontend
+        working-directory: frontend-vite
+        run: npm run build
+
+      - name: Build Domino update site
+        working-directory: hello-webapp
+        run: mvn -B package
+
+      - name: Upload update-site repository
+        uses: actions/upload-artifact@v4
+        with:
+          name: update-site-repository
+          path: hello-webapp/target/repository/
+          if-no-files-found: error
+
+      - name: Upload bundle jar
+        uses: actions/upload-artifact@v4
+        with:
+          name: hello-webapp-bundle
+          path: hello-webapp/target/hello-webapp-*.jar
+          if-no-files-found: error
+
