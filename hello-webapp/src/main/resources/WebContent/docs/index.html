@@ -18,8 +18,8 @@
             <h1><span class="lang-zh">瀏覽器內建說明頁</span><span class="lang-en">In-Browser Tutorial Notes</span></h1>
             <p class="lede">
                 <span class="lang-zh">
-                    這個區域是給教學站本身使用的「網頁版說明文件」。正式的完整紀錄仍保留在 repo 根目錄的
-                    <code>docs/</code>，而這裡則提供比較好閱讀、適合展示的摘要版本。
+                    這裡是教學站使用的「網頁版文件」。完整技術紀錄保留在 repo 根目錄的
+                    <code>docs/</code> 目錄，而這裡則提供較好閱讀、適合展示與導覽的摘要版本。
                 </span>
                 <span class="lang-en">
                     This area is the in-browser documentation layer for the tutorial site.
@@ -28,7 +28,7 @@
                 </span>
             </p>
             <nav class="docs-nav">
-                <a href="../index.html"><span class="lang-zh">回首頁</span><span class="lang-en">Tutorial Home</span></a>
+                <a href="../index.html"><span class="lang-zh">回教程首頁</span><span class="lang-en">Tutorial Home</span></a>
                 <a href="../step1/index.html"><span class="lang-zh">步驟一展示</span><span class="lang-en">Step 1 Demo</span></a>
                 <a href="../step2/index.html"><span class="lang-zh">步驟二展示</span><span class="lang-en">Step 2 Demo</span></a>
                 <a href="../step3/index.html"><span class="lang-zh">步驟三展示</span><span class="lang-en">Step 3 Demo</span></a>
@@ -44,14 +44,16 @@
                 </p>
                 <div class="docs-nav"><a href="./step1.html"><span class="lang-zh">閱讀步驟一</span><span class="lang-en">Open Step 1 Docs</span></a></div>
             </article>
+
             <article class="docs-panel">
                 <h2><span class="lang-zh">步驟二</span><span class="lang-en">Step 2</span></h2>
                 <p>
-                    <span class="lang-zh">說明如何換成 Vite build，同時保留原本 UpdateSite 與 Domino 部署方式。</span>
+                    <span class="lang-zh">說明如何改成 Vite build，同時保留原本 UpdateSite 與 Domino 部署方式。</span>
                     <span class="lang-en">Explains how the front end moved to a Vite build while keeping the same Domino deployment path.</span>
                 </p>
                 <div class="docs-nav"><a href="./step2.html"><span class="lang-zh">閱讀步驟二</span><span class="lang-en">Open Step 2 Docs</span></a></div>
             </article>
+
             <article class="docs-panel">
                 <h2><span class="lang-zh">步驟三</span><span class="lang-en">Step 3</span></h2>
                 <p>
@@ -60,9 +62,19 @@
                 </p>
                 <div class="docs-nav"><a href="./step3.html"><span class="lang-zh">閱讀步驟三</span><span class="lang-en">Open Step 3 Docs</span></a></div>
             </article>
+
+            <article class="docs-panel">
+                <h2><span class="lang-zh">CI 部署流程</span><span class="lang-en">CI Deployment Flow</span></h2>
+                <p>
+                    <span class="lang-zh">說明如何從 GitHub Actions 下載 `update-site-repository` artifact，再拿去更新 Domino 的 `updatesite.nsf`。</span>
+                    <span class="lang-en">Explains how to download the `update-site-repository` artifact from GitHub Actions and use it to update Domino `updatesite.nsf`.</span>
+                </p>
+                <div class="docs-nav"><a href="./deploy.html"><span class="lang-zh">閱讀部署流程</span><span class="lang-en">Open Deployment Guide</span></a></div>
+            </article>
         </section>
     </main>
 
     <script src="../assets/lang-toggle.js"></script>
 </body>
 </html>
+

@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CI Artifact 更新 UpdateSite 指南</title>
+    <link rel="stylesheet" href="../assets/site.css">
+    <link rel="stylesheet" href="./docs.css">
+</head>
+<body data-lang="zh">
+    <main class="docs-shell">
+        <div class="page-topbar">
+            <button type="button" class="lang-toggle" data-label-zh="English" data-label-en="中文"></button>
+        </div>
+
+        <header class="docs-hero">
+            <p class="eyebrow"><span class="lang-zh">CI 部署指南</span><span class="lang-en">CI Deployment Guide</span></p>
+            <h1><span class="lang-zh">從 Actions Artifact 更新 `updatesite.nsf`</span><span class="lang-en">Updating `updatesite.nsf` From Actions Artifacts</span></h1>
+            <p class="lede">
+                <span class="lang-zh">
+                    現在 GitHub Actions 已經會自動 build 專案並產出 artifact。
+                    這份頁面說明如何把 CI 產物拿下來，匯入 Domino 的 `updatesite.nsf`，
+                    然後完成 HTTP reload 與站台驗證。
+                </span>
+                <span class="lang-en">
+                    GitHub Actions now builds the project automatically and publishes artifacts.
+                    This page explains how to download those CI outputs, import them into Domino
+                    `updatesite.nsf`, and complete the HTTP reload and verification steps.
+                </span>
+            </p>
+            <nav class="docs-nav">
+                <a href="./index.html"><span class="lang-zh">回文件首頁</span><span class="lang-en">Docs Home</span></a>
+                <a href="../index.html"><span class="lang-zh">回教程首頁</span><span class="lang-en">Tutorial Home</span></a>
+                <a href="../step3/index.html"><span class="lang-zh">打開目前展示</span><span class="lang-en">Open Current Demo</span></a>
+            </nav>
+        </header>
+
+        <section class="docs-panel">
+            <h2><span class="lang-zh">目前已知條件</span><span class="lang-en">Current Known Setup</span></h2>
+            <ul>
+                <li><span class="lang-zh">GitHub repo：`bryanHsiao/domino-static-webapp-tutorial`</span><span class="lang-en">GitHub repo: `bryanHsiao/domino-static-webapp-tutorial`</span></li>
+                <li><span class="lang-zh">Workflow 名稱：`Build Tutorial Site`</span><span class="lang-en">Workflow name: `Build Tutorial Site`</span></li>
+                <li><span class="lang-zh">主要 artifact：`update-site-repository`</span><span class="lang-en">Primary artifact: `update-site-repository`</span></li>
+                <li><span class="lang-zh">第一次成功 run id：`24794809561`</span><span class="lang-en">First successful run id: `24794809561`</span></li>
+            </ul>
+        </section>
+
+        <section class="docs-panel">
+            <h2><span class="lang-zh">你真正需要的 artifact</span><span class="lang-en">Which Artifact You Actually Need</span></h2>
+            <p>
+                <span class="lang-zh">
+                    更新 `updatesite.nsf` 時，真正需要的是 `update-site-repository`。
+                    這個 artifact 對應的是 `hello-webapp/target/repository/`，裡面會包含：
+                    `site.xml`、`artifacts.jar`、`content.jar`、`features/` 與 `plugins/`。
+                </span>
+                <span class="lang-en">
+                    To update `updatesite.nsf`, the artifact you actually need is `update-site-repository`.
+                    It corresponds to `hello-webapp/target/repository/` and contains `site.xml`,
+                    `artifacts.jar`, `content.jar`, `features/`, and `plugins/`.
+                </span>
+            </p>
+        </section>
+
+        <section class="docs-panel">
+            <h2><span class="lang-zh">做法 A：從 GitHub 網頁下載</span><span class="lang-en">Option A: Download From GitHub Web UI</span></h2>
+            <ol>
+                <li><span class="lang-zh">打開 repo 的 `Actions` 頁。</span><span class="lang-en">Open the repository `Actions` tab.</span></li>
+                <li><span class="lang-zh">打開最新一筆成功的 `Build Tutorial Site`。</span><span class="lang-en">Open the latest successful `Build Tutorial Site` run.</span></li>
+                <li><span class="lang-zh">在 `Artifacts` 區塊下載 `update-site-repository`。</span><span class="lang-en">Download `update-site-repository` from the `Artifacts` section.</span></li>
+                <li><span class="lang-zh">解壓縮並確認裡面有 `site.xml`。</span><span class="lang-en">Extract it and confirm that `site.xml` is present.</span></li>
+            </ol>
+        </section>
+
+        <section class="docs-panel">
+            <h2><span class="lang-zh">做法 B：用 GitHub CLI 下載</span><span class="lang-en">Option B: Download With GitHub CLI</span></h2>
+            <pre><code>gh run download 24794809561 `
+  --repo bryanHsiao/domino-static-webapp-tutorial `
+  --name update-site-repository `
+  --dir artifacts/update-site-repository</code></pre>
+            <p>
+                <span class="lang-zh">下載後要匯入的檔案是 `artifacts/update-site-repository/site.xml`。</span>
+                <span class="lang-en">After download, the file you import is `artifacts/update-site-repository/site.xml`.</span>
+            </p>
+        </section>
+
+        <section class="docs-panel">
+            <h2><span class="lang-zh">如何更新 `updatesite.nsf`</span><span class="lang-en">How To Update `updatesite.nsf`</span></h2>
+            <ol>
+                <li><span class="lang-zh">打開 Domino 的 `updatesite.nsf`。</span><span class="lang-en">Open the Domino `updatesite.nsf`.</span></li>
+                <li><span class="lang-zh">選擇 `Import Local Update Site`。</span><span class="lang-en">Choose `Import Local Update Site`.</span></li>
+                <li><span class="lang-zh">指到解壓後的 `site.xml`。</span><span class="lang-en">Point it to the extracted `site.xml`.</span></li>
+                <li><span class="lang-zh">匯入完成後，視情況移除舊版 `hello-webapp` feature/plugin。</span><span class="lang-en">After import, remove older `hello-webapp` feature/plugin entries if needed.</span></li>
+                <li><span class="lang-zh">在 Domino console 執行 `restart task http`。</span><span class="lang-en">Run `restart task http` in the Domino console.</span></li>
+            </ol>
+        </section>
+
+        <section class="docs-panel">
+            <h2><span class="lang-zh">建議驗證網址</span><span class="lang-en">Recommended Verification URLs</span></h2>
+            <ul>
+                <li>`/hello-webapp/`</li>
+                <li>`/hello-webapp/docs/index.html`</li>
+                <li>`/hello-webapp/step1/index.html`</li>
+                <li>`/hello-webapp/step2/index.html`</li>
+                <li>`/hello-webapp/step3/index.html`</li>
+            </ul>
+            <p>
+                <span class="lang-zh">如果 Step 3 在這次部署裡，也要確認 `/api` 資料有成功顯示在 dashboard 上。</span>
+                <span class="lang-en">If Step 3 is part of the deployment, also verify that `/api` data appears successfully in the dashboard.</span>
+            </p>
+        </section>
+    </main>
+
+    <script src="../assets/lang-toggle.js"></script>
+</body>
+</html>

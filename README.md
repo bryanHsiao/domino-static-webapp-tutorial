@@ -9,6 +9,7 @@ Contents:
 - `docs/step-2-frontend-replacement-plan.md`: scope and checklist for the next phase
 - `docs/step-2-vite-implementation-record.md`: actual Vite implementation record for Step 2
 - `docs/step-3-live-api-implementation-record.md`: Step 3 live API and web-docs implementation record
+- `docs/github-actions-artifact-to-updatesite-guide.md`: how to download CI artifacts and update `updatesite.nsf`
 - `.github/workflows/ci.yml`: GitHub Actions workflow for building the tutorial site
 - `hello-webapp/`: minimal sample project you can build and deploy
 - `frontend-vite/`: Vite frontend project that builds into `hello-webapp`
@@ -32,6 +33,7 @@ The sample follows the same general approach described by Jesse Gallagher and us
 - `docs/step-2-frontend-replacement-plan.md`：下一階段的前端替換計畫
 - `docs/step-2-vite-implementation-record.md`：Step 2 的實作紀錄
 - `docs/step-3-live-api-implementation-record.md`：Step 3 與網頁版文件的實作紀錄
+- `docs/github-actions-artifact-to-updatesite-guide.md`：如何從 GitHub Actions artifact 更新 `updatesite.nsf`
 - `.github/workflows/ci.yml`：GitHub Actions 自動建置流程
 - `hello-webapp/`：可直接 build 與部署的最小範例專案
 - `frontend-vite/`：會將 Vite build 輸出到 `hello-webapp` 的前端專案
