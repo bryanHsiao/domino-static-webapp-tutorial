@@ -2,6 +2,10 @@
 
 This workspace contains a minimal example and tutorial for deploying static frontend assets to HCL Domino as an OSGi webapp, packaged as a p2 update site and then imported into an `updatesite.nsf`.
 
+Live tutorial site:
+
+- [https://ap02.domino.com.tw/hello-webapp/](https://ap02.domino.com.tw/hello-webapp/)
+
 Contents:
 
 - `docs/domino-static-webapp-tutorial.md`: step-by-step tutorial
@@ -25,6 +29,10 @@ The sample follows the same general approach described by Jesse Gallagher and us
 ## 繁體中文
 
 這個 workspace 包含一份最小可執行範例，以及一份教學文件，用來說明如何把靜態前端資源包裝成 HCL Domino 上的 OSGi webapp，接著產生 p2 update site，再匯入 `updatesite.nsf` 進行部署。
+
+線上教學站：
+
+- https://ap02.domino.com.tw/hello-webapp/
 
 內容包含：
 
