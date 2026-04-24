@@ -2,4 +2,4 @@ frontend-vite/node_modules/
 hello-webapp/target/
 .DS_Store
 Thumbs.db
-
+.spectra/
