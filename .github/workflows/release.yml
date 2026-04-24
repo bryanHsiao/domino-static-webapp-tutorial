@@ -1,0 +1,89 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+          cache-dependency-path: frontend-vite/package-lock.json
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+
+      - name: Derive version from tag
+        id: version
+        run: |
+          TAG="${GITHUB_REF_NAME}"
+          VERSION="${TAG#v}"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "Tag:     $TAG"
+          echo "Version: $VERSION"
+
+      - name: Install frontend dependencies
+        working-directory: frontend-vite
+        run: npm ci
+
+      - name: Build frontend
+        working-directory: frontend-vite
+        run: npm run build
+
+      - name: Stamp Maven version from tag
+        working-directory: hello-webapp
+        run: mvn -B versions:set -DnewVersion=${{ steps.version.outputs.version }} -DgenerateBackupPoms=false
+
+      - name: Build Domino update site
+        working-directory: hello-webapp
+        run: mvn -B package
+
+      - name: Package update site as zip
+        working-directory: hello-webapp/target
+        run: |
+          ZIP_NAME="hello-webapp-${{ steps.version.outputs.tag }}-updatesite.zip"
+          zip -r "$ZIP_NAME" repository/
+          ls -la "$ZIP_NAME"
+          echo "zip=$ZIP_NAME" >> "$GITHUB_OUTPUT"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: ${{ steps.version.outputs.tag }}
+          generate_release_notes: true
+          append_body: true
+          prerelease: ${{ contains(github.ref_name, '-') }}
+          files: |
+            hello-webapp/target/hello-webapp-${{ steps.version.outputs.tag }}-updatesite.zip
+            hello-webapp/target/hello-webapp-${{ steps.version.outputs.version }}.jar
+          body: |
+            ## Deployment
+
+            1. Download `hello-webapp-${{ steps.version.outputs.tag }}-updatesite.zip`.
+            2. Unzip — you will get a `repository/` folder.
+            3. Open `updatesite.nsf`, click **Import Local Update Site**, and select `repository/site.xml`.
+            4. Sign the imported content with a trusted Notes ID. **Unsigned bundles will not load.**
+            5. Ensure the server `notes.ini` contains `OSGI_HTTP_DYNAMIC_BUNDLES=updatesite.nsf`.
+            6. On the Domino console: `restart task http`.
+            7. Open `/hello-webapp/` in a browser. Verify with `tell http osgi ss` that the bundle is **ACTIVE**.
+
+            See [`docs/github-actions-artifact-to-updatesite-guide.md`](https://github.com/${{ github.repository }}/blob/${{ github.ref_name }}/docs/github-actions-artifact-to-updatesite-guide.md) for the full guide.
+
+            ---
